@@ -64,7 +64,8 @@
       transition: opacity .6s ease, visibility .6s ease;
     }
     .preloader.hidden { opacity: 0; visibility: hidden; }
-    .preloader-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: .32em; text-transform: uppercase; }
+    .preloader-logo { font-size: 1.4rem; font-weight: 800; letter-spacing: .32em; text-transform: uppercase; animation: pulseLogo 1.5s ease-in-out infinite; }
+    @keyframes pulseLogo { 0%,100%{opacity:.6;letter-spacing:.3em} 50%{opacity:1;letter-spacing:.36em} }
     .preloader-bar { width: 160px; height: 2px; background: var(--line); overflow: hidden; }
     .preloader-bar::after { content:''; display:block; height:100%; width:40%; background: var(--text); animation: loadBar 1.1s ease-in-out infinite; }
     @keyframes loadBar { 0%{transform:translateX(-100%)} 100%{transform:translateX(300%)} }
@@ -97,7 +98,7 @@
     .btn:hover::before { transform: translateX(100%); }
 
     /* =========================================================
-       ШАПКА — ЛОГО СЛЕВА, КНОПКИ ПО ЦЕНТРУ, ТЕЛЕФОН СПРАВА
+       ШАПКА
        ========================================================= */
     .header {
       position: fixed; inset: 0 0 auto 0; z-index: 1000;
@@ -120,7 +121,6 @@
       min-height: 46px;
     }
 
-    /* Логотип слева */
     .logo {
       font-size: 1.18rem; font-weight: 800; letter-spacing: .08em;
       text-transform: uppercase; white-space: nowrap;
@@ -132,7 +132,6 @@
     .logo:hover { letter-spacing: .16em; }
     .logo span { color: var(--text-muted); font-weight: 400; }
 
-    /* Блок по центру: пилюля + бургер */
     .header-actions {
       position: absolute;
       left: 50%;
@@ -142,7 +141,6 @@
       z-index: 2;
     }
 
-    /* Телефон — в правом углу */
     .header-phone {
       position: absolute;
       right: 0;
@@ -273,7 +271,7 @@
     .nav-pill:hover .nav-pill__label svg,
     .nav-pill:focus-within .nav-pill__label svg { transform: rotate(180deg); }
 
-    /* ===== БУРГЕР — 4 ТОЧКИ ===== */
+    /* ===== БУРГЕР ===== */
     .menu-trigger {
       width: 46px; height: 46px;
       border-radius: 50%;
@@ -306,7 +304,6 @@
     .menu-trigger.active span:nth-child(3) { transform: translate(4px, -4px); }
     .menu-trigger.active span:nth-child(4) { transform: translate(-4px, -4px); }
 
-    /* ===== АДАПТИВ ШАПКИ ===== */
     @media (max-width: 1100px) {
       .nav-pill__link { padding: 8px 10px; font-size: .74rem; }
       .header-phone { display: none; }
@@ -559,7 +556,7 @@
     .scroll-indicator::after { content:''; width:3px; height:8px; background:var(--text); border-radius:2px; animation: scrollDot 1.9s ease-in-out infinite; }
     @keyframes scrollDot { 0%,100%{transform:translateY(0);opacity:1} 50%{transform:translateY(9px);opacity:.25} }
 
-    /* ===== NUMBERS → БЕГУЩАЯ СТРОКА ===== */
+    /* ===== NUMBERS ===== */
     .numbers {
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
@@ -764,18 +761,6 @@
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
     .faq-a p { padding-bottom: 20px; color: var(--text-muted); font-size: .91rem; max-width: 680px; }
 
-    /* ===== BEFORE / AFTER ===== */
-    .before-after { position: relative; max-width: 900px; margin: 0 auto; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16/9; user-select: none; -webkit-user-select: none; transition: box-shadow .4s; }
-    .before-after:hover { box-shadow: 0 30px 60px rgba(0,0,0,.6); }
-    .before-after img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; filter: grayscale(1); }
-    .before-after .after-img { clip-path: inset(0 0 0 50%); z-index: 2; }
-    .before-after .before-img { z-index: 1; }
-    .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: var(--text); z-index: 3; transform: translateX(-50%); cursor: ew-resize; }
-    .ba-handle::after { content:''; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:var(--text); box-shadow: 0 4px 18px rgba(0,0,0,.6); }
-    .ba-handle::before { content:'‹ ›'; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); z-index:4; color:var(--bg); font-size:1rem; font-weight:700; letter-spacing:-2px; pointer-events:none; }
-    .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 5; margin: 0; }
-    .ba-labels { display:flex; justify-content:space-between; max-width:900px; margin:14px auto 0; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color: var(--text-muted); }
-
     /* ===== CONTACT ===== */
     .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
     .contact-info p { color: var(--text-muted); margin-bottom: 28px; }
@@ -894,28 +879,222 @@
     .recently-list a { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: .78rem; color: var(--text-muted); transition: all .3s; }
     .recently-list a:hover { border-color: var(--text); color: var(--text); }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) { .contact-wrap { grid-template-columns: 1fr; } .service-details { grid-template-columns: 1fr; gap: 28px; } }
-    @media (max-width: 768px) {
-      .section { padding: 72px 0; }
-      .hero-stats { gap: 24px; }
-      .hero-stat strong { font-size: 1.4rem; }
-      .form { padding: 26px 20px; }
-      .map-overlay { top: 14px; left: 14px; padding: 11px 15px; font-size: .68rem; }
-      .calc { grid-template-columns: 1fr; padding: 28px 20px; gap: 22px; }
-      .calc-price { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 22px; }
-      .service-page { padding: 110px 0 50px; }
-      .filter-bar { flex-direction: column; align-items: stretch; }
-      .modal-inner { padding: 24px 20px; }
+    /* =========================================================
+       ДОПОЛНИТЕЛЬНЫЕ АНИМАЦИИ (ПК + ТЕЛЕФОН)
+       ========================================================= */
+
+    /* Мягкое покачивание иконок в карточках услуг */
+    .service-card:hover .service-icon svg {
+      animation: iconWiggle 0.6s var(--ease-smooth);
     }
-    @media (max-width: 480px) {
-      .hero-actions { flex-direction: column; }
-      .btn { width: 100%; }
-      .hero-stats { flex-direction: column; gap: 16px; }
-      .filter-tabs { gap: 6px; }
-      .filter-btn { padding: 7px 13px; font-size: .68rem; }
+    @keyframes iconWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-8deg); }
+      75% { transform: rotate(8deg); }
+    }
+
+    /* Пульсирующее свечение FAB-кнопки */
+    .quick-fab {
+      animation: floatPulse 3s ease-in-out infinite;
+    }
+    @keyframes floatPulse {
+      0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.45), 0 0 0 0 color-mix(in srgb, var(--text) 40%, transparent); }
+      50% { box-shadow: 0 8px 24px rgba(0,0,0,.45), 0 0 0 14px transparent; }
+    }
+
+    /* Микро-анимация точек бургера */
+    .menu-trigger:hover span:nth-child(1) { transform: translate(-1px, -1px); }
+    .menu-trigger:hover span:nth-child(2) { transform: translate(1px, -1px); }
+    .menu-trigger:hover span:nth-child(3) { transform: translate(-1px, 1px); }
+    .menu-trigger:hover span:nth-child(4) { transform: translate(1px, 1px); }
+
+    /* Плавное появление контактных строк */
+    @media (max-width: 900px) {
+      #contact .contact-line {
+        transition: opacity .5s var(--ease), transform .5s var(--ease), background .3s, border-color .3s;
+      }
+      #contact .contact-info.visible .contact-line:nth-of-type(1) { transition-delay: .1s; }
+      #contact .contact-info.visible .contact-line:nth-of-type(2) { transition-delay: .18s; }
+      #contact .contact-info.visible .contact-line:nth-of-type(3) { transition-delay: .26s; }
+    }
+
+    /* ===== ЖЕСТКАЯ МОБИЛЬНАЯ ФИКСАЦИЯ (из прошлого шага) ===== */
+    @media (max-width: 900px) {
+      html, body { overflow-x: hidden; max-width: 100vw; }
+      #contact.section { padding: 48px 0 60px; }
+      #contact .container { width: 100%; max-width: 100%; padding-left: 16px; padding-right: 16px; margin: 0; }
+      #contact .contact-wrap { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+      #contact .contact-info { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+      #contact .contact-info .eyebrow { display: none; }
+      #contact .contact-info .section-title { font-size: clamp(1.6rem, 7vw, 2rem); line-height: 1.15; margin-bottom: 16px; width: 100%; }
+      #contact .contact-info > p { font-size: .9rem; line-height: 1.5; margin-bottom: 24px; width: 100%; }
+      #contact .contact-line {
+        display: flex !important; flex-direction: row !important; align-items: center !important;
+        width: 100% !important; padding: 14px 16px; margin-bottom: 10px;
+        background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; gap: 14px;
+        opacity: 1 !important; transform: none !important;
+      }
+      #contact .contact-line:last-of-type { margin-bottom: 0; }
+      #contact .contact-line-icon { width: 36px !important; height: 36px !important; flex-shrink: 0; }
+      #contact .contact-line > div:last-child { flex: 1; min-width: 0; font-size: .95rem; line-height: 1.4; text-align: left; word-break: break-word; }
+      #contact .contact-line small { font-size: .65rem; margin-bottom: 4px; }
+      #contact .form { width: 100% !important; padding: 24px 20px; border-radius: 16px; }
+      #contact .form h3 { font-size: 1.15rem; margin-bottom: 6px; }
+      #contact .form-note { font-size: .85rem; margin-bottom: 20px; }
+      #contact .timer-line { padding: 10px 14px; font-size: .8rem; margin-bottom: 20px; }
+      #contact .form-group { margin-bottom: 16px; width: 100%; }
+      #contact .form-group input, #contact .form-group textarea, #contact .form-group select { width: 100% !important; padding: 14px 16px; font-size: 16px !important; border-radius: 10px; }
+      #contact .form-submit { width: 100% !important; padding: 16px; font-size: .9rem; margin-top: 8px; }
+      #contact .form .form-group, #contact .form .form-submit { opacity: 1 !important; transform: none !important; animation: none !important; }
+      #contact .section-title::after { display: none; }
+    }
+
+    @media (max-width: 380px) {
+      #contact .contact-info .section-title { font-size: 1.4rem; }
+      #contact .form { padding: 20px 16px; }
+      #contact .contact-line { padding: 12px 14px; gap: 10px; }
+      #contact .contact-line-icon { width: 32px !important; height: 32px !important; }
+    }
+
+    /* ===== ПРОЧИЕ МОБИЛЬНЫЕ ПРАВКИ ===== */
+    @media (max-width: 900px) {
+      .header { padding: 12px 0; }
+      .header.scrolled { padding: 8px 0; }
+      .header-inner { min-height: 44px; gap: 12px; }
+      .logo { font-size: 1rem; letter-spacing: .06em; }
+      .logo:hover { letter-spacing: .06em; }
+      .nav-pill { display: none; }
+      .header-phone { display: none; }
+      .menu-trigger { width: 44px; height: 44px; padding: 12px; }
+      .hero { padding-top: 100px; padding-bottom: 48px; min-height: 100svh; }
+      .hero-content { max-width: 100%; }
+      .hero-badge { font-size: .64rem; padding: 6px 12px; letter-spacing: .12em; margin-bottom: 20px; }
+      .hero h1 { font-size: clamp(1.9rem, 9vw, 3rem); line-height: 1.06; letter-spacing: -.025em; margin-bottom: 18px; }
+      .hero p { font-size: .96rem; margin-bottom: 26px; max-width: 100%; }
+      .hero-actions { gap: 10px; }
+      .hero-actions .btn { width: 100%; }
+      .hero-stats { gap: 20px 28px; margin-top: 36px; padding-top: 22px; flex-wrap: wrap; }
+      .hero-stat strong { font-size: 1.5rem; }
+      .hero-stat span { font-size: .68rem; }
+      .scroll-indicator { display: none; }
+      .numbers-ticker { padding: 14px 0; }
+      .numbers-ticker .ticker-item { font-size: .82rem; padding: 0 16px; gap: 16px; }
+      .section { padding: 56px 0; }
+      .section-title { font-size: clamp(1.6rem, 6.5vw, 2.2rem); }
+      .section-subtitle { font-size: .95rem; margin-bottom: 32px; margin-top: 16px; }
+      .filter-bar { flex-direction: column; align-items: stretch; gap: 12px; }
+      .filter-tabs { gap: 6px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; scrollbar-width: none; }
+      .filter-tabs::-webkit-scrollbar { display: none; }
+      .filter-btn { flex-shrink: 0; padding: 8px 14px; font-size: .68rem; }
+      .compare-toggle { padding: 10px 18px; font-size: .72rem; align-self: flex-start; }
+      .services-grid { grid-template-columns: 1fr; gap: 14px; }
+      .service-body { padding: 18px 20px 22px; }
+      .service-body h3 { font-size: 1rem; }
+      .service-body p { font-size: .84rem; }
+      .service-link { font-size: .7rem; }
+      .quick-calc { padding: 7px 12px; font-size: .66rem; }
       .card-actions { top: 10px; right: 10px; }
       .fav-btn, .compare-check { width: 30px; height: 30px; }
+      .service-icon { width: 40px; height: 40px; left: 16px; bottom: 14px; }
+      .service-icon svg { width: 18px; height: 18px; }
+      .calc { grid-template-columns: 1fr; padding: 24px 18px; gap: 20px; }
+      .calc h3 { font-size: 1rem; }
+      .calc > div > p { font-size: .82rem; margin-bottom: 18px; }
+      .calc-field { margin-bottom: 14px; }
+      .calc-field label { font-size: .66rem; }
+      .calc-field select { padding: 11px 12px; font-size: .88rem; }
+      .calc-price { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 20px; align-items: stretch; }
+      .calc-price strong { font-size: 1.9rem; }
+      .calc-price .btn { width: 100%; margin-top: 18px !important; }
+      .pm-tabs { gap: 6px; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; padding-bottom: 4px; scrollbar-width: none; }
+      .pm-tabs::-webkit-scrollbar { display: none; }
+      .pm-tab { flex-shrink: 0; padding: 8px 14px; font-size: .68rem; }
+      .pm-grid { grid-template-columns: 1fr; gap: 8px; }
+      .pm-item { padding: 14px 16px; }
+      .pm-item strong { font-size: .84rem; }
+      .pm-item span { font-size: .86rem; }
+      .timeline { padding-left: 44px; }
+      .timeline-line { left: 12px; }
+      .tl-step { padding-bottom: 28px; }
+      .tl-dot { left: -36px; top: 4px; width: 16px; height: 16px; }
+      .tl-step .num { font-size: .64rem; }
+      .tl-step h3 { font-size: .96rem; }
+      .tl-step p { font-size: .84rem; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 12px; }
+      .review-card { padding: 22px 20px; }
+      .review-stars { font-size: .8rem; }
+      .review-text { font-size: .88rem; }
+      .faq-list { max-width: 100%; }
+      .faq-q { padding: 16px 0; font-size: .92rem; gap: 14px; }
+      .faq-icon { width: 12px; height: 12px; }
+      .faq-a p { font-size: .86rem; padding-bottom: 16px; }
+      .map-wrap { height: 320px; }
+      .map-overlay { top: 12px; left: 12px; padding: 10px 14px; font-size: .66rem; }
+      .footer { padding: 28px 0; }
+      .footer-inner { flex-direction: column; text-align: center; gap: 12px; font-size: .76rem; }
+      .quick-fab { width: 44px; height: 44px; right: 16px; bottom: 70px; }
+      .quick-fab svg { width: 18px; height: 18px; }
+      .to-top { width: 40px; height: 40px; right: 16px; bottom: 16px; }
+      .to-top svg { width: 15px; height: 15px; }
+      .modal { padding: 12px; align-items: flex-end; }
+      .modal-inner { padding: 24px 20px; border-radius: 18px 18px 0 0; max-height: 92vh; }
+      .modal-inner h3 { font-size: 1.1rem; }
+      .modal-inner .muted { font-size: .82rem; margin-bottom: 18px; }
+      .modal-close { top: 14px; right: 14px; width: 34px; height: 34px; }
+      .service-page { padding: 96px 0 40px; }
+      .service-page-back { font-size: .74rem; margin-bottom: 24px; }
+      .service-page h1 { font-size: clamp(1.6rem, 7vw, 2.2rem); margin-bottom: 14px; }
+      .service-page .lead { font-size: .94rem; margin-bottom: 22px; }
+      .service-hero-img { max-height: 240px; margin-bottom: 28px; }
+      .service-page-meta { gap: 6px; margin-bottom: 24px; }
+      .meta-tag { padding: 6px 12px; font-size: .64rem; }
+      .service-details { grid-template-columns: 1fr; gap: 22px; margin-bottom: 32px; }
+      .service-details h3 { font-size: .96rem; }
+      .service-details ul li { font-size: .86rem; margin-bottom: 10px; }
+      .service-cta { width: 100%; justify-content: center; padding: 14px 22px; font-size: .8rem; }
+      .share-btn { width: 100%; justify-content: center; margin-left: 0; margin-top: 10px; padding: 12px 16px; }
+      .recently { margin-top: 40px; padding-top: 22px; }
+      .recently h4 { font-size: .7rem; }
+      .recently-list a { font-size: .74rem; padding: 7px 13px; }
+      .site-menu__inner { padding: 84px 20px 28px; gap: 28px; }
+      .site-menu__top { padding-bottom: 18px; }
+      .site-menu__logo { font-size: .96rem; }
+      .site-menu__close { width: 40px; height: 40px; }
+      .site-menu__grid { grid-template-columns: 1fr; gap: 28px; }
+      .site-menu__label { font-size: .66rem; margin-bottom: 16px; padding-bottom: 10px; }
+      .site-menu__link { font-size: 1rem; padding: 12px 0; gap: 12px; }
+      .site-menu__link::before { min-width: 20px; font-size: .62rem; }
+      .site-menu__list--secondary .site-menu__link { font-size: .9rem; padding: 10px 0; }
+      .site-menu__footer { flex-direction: column; align-items: stretch; gap: 16px; padding-top: 22px; }
+      .site-menu__contact { font-size: .8rem; text-align: center; }
+      .site-menu__cta { width: 100%; text-align: center; padding: 14px 22px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { width: calc(100% - 32px); }
+      .hero h1 { font-size: clamp(1.75rem, 10vw, 2.4rem); }
+      .hero p { font-size: .9rem; }
+      .hero-stat strong { font-size: 1.35rem; }
+      .section-title { font-size: clamp(1.5rem, 7vw, 1.9rem); }
+      .section-subtitle { font-size: .9rem; }
+      .filter-btn { padding: 7px 12px; font-size: .64rem; }
+      .quick-calc { padding: 6px 10px; font-size: .62rem; }
+      .review-card { padding: 20px 18px; }
+      .review-text { font-size: .84rem; }
+      .form { padding: 20px 16px; }
+      .calc { padding: 22px 16px; }
+      .calc-price strong { font-size: 1.7rem; }
+      .service-page h1 { font-size: clamp(1.4rem, 8vw, 1.9rem); }
+      .meta-tag { font-size: .6rem; padding: 5px 10px; }
+      .site-menu__link { font-size: .94rem; }
+      .site-menu__list--secondary .site-menu__link { font-size: .86rem; }
+    }
+
+    @media (max-width: 360px) {
+      .hero h1 { font-size: 1.6rem; }
+      .hero-stats { flex-direction: column; gap: 14px; }
+      .logo { font-size: .92rem; }
+      .menu-trigger { width: 40px; height: 40px; padding: 10px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -923,7 +1102,8 @@
       .reveal, .hero-badge, .hero h1 .line span, .hero p, .hero-actions, .hero-stats, .scroll-indicator, .service-card {
         opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important;
       }
-      .hero-bg::before, .hero-glow, .hero h1 .accent::after, .hero-badge::before, .scroll-indicator::after, .timer-dot, .calc.highlight { animation: none !important; }
+      .hero-bg::before, .hero-glow, .hero h1 .accent::after, .hero-badge::before, .scroll-indicator::after, .timer-dot, .calc.highlight,
+      .service-card:hover .service-icon svg, .quick-fab, .menu-trigger:hover span { animation: none !important; }
       .service-card:hover, .why-item:hover, .review-card:hover, .contact-line:hover { transform: none; }
       .site-menu__item, .site-menu__top, .site-menu__label, .site-menu__footer { opacity: 1 !important; transform: none !important; transition: none !important; }
       .nav-pill__links { max-width: none !important; opacity: 1 !important; }
@@ -942,9 +1122,6 @@
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- ========================================================= -->
-  <!-- ШАПКА — ЛОГО СЛЕВА, КНОПКИ ПО ЦЕНТРУ, ТЕЛЕФОН СПРАВА -->
-  <!-- ========================================================= -->
   <header class="header" id="header">
     <div class="container header-inner">
       <a href="#" class="logo" data-page-link="home">Detail<span>Studio</span></a>
@@ -973,9 +1150,6 @@
     </div>
   </header>
 
-  <!-- ========================================================= -->
-  <!-- ПОЛНОЭКРАННОЕ МЕНЮ -->
-  <!-- ========================================================= -->
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Меню сайта" aria-hidden="true">
     <div class="site-menu__inner">
       <div class="site-menu__top">
@@ -1011,7 +1185,6 @@
             <div class="site-menu__item"><a href="#reviews" class="site-menu__link" data-page-link="home">Отзывы клиентов</a></div>
             <div class="site-menu__item"><a href="#calculator" class="site-menu__link" data-page-link="home">Калькулятор стоимости</a></div>
             <div class="site-menu__item"><a href="#pricemap" class="site-menu__link" data-page-link="home">Карта цен</a></div>
-            <div class="site-menu__item"><a href="#gallery" class="site-menu__link" data-page-link="home">До и после</a></div>
             <div class="site-menu__item"><a href="#faq" class="site-menu__link" data-page-link="home">Частые вопросы</a></div>
             <div class="site-menu__item"><a href="#contact" class="site-menu__link" data-page-link="home">Контакты</a></div>
           </nav>
@@ -1029,12 +1202,8 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
-  <!-- ГЛАВНАЯ ===== -->
-  <!-- ========================================================= -->
   <main id="page-home" class="page-view active">
 
-    <!-- HERO С ВИДЕО-ФОНОМ -->
     <section class="hero" id="hero">
       <video class="hero-video" autoplay muted loop playsinline preload="auto">
         <source src="ef9ab565b86c437de33caa9a8c6649e4_720w.mp4" type="video/mp4">
@@ -1064,7 +1233,6 @@
       <div class="scroll-indicator" aria-hidden="true"></div>
     </section>
 
-    <!-- NUMBERS → БЕГУЩАЯ СТРОКА УСЛУГ -->
     <section class="numbers" id="numbers" aria-label="Наши услуги">
       <div class="numbers-ticker">
         <div class="ticker-track">
@@ -1096,7 +1264,6 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section class="section" id="services">
       <div class="container">
         <span class="eyebrow reveal"></span>
@@ -1310,7 +1477,6 @@
       </div>
     </section>
 
-    <!-- CALCULATOR -->
     <section class="section" id="calculator">
       <div class="container">
         <span class="eyebrow reveal"></span>
@@ -1364,7 +1530,6 @@
       </div>
     </section>
 
-    <!-- PRICE MAP -->
     <section class="section" id="pricemap">
       <div class="container">
         <span class="eyebrow reveal"></span>
@@ -1382,7 +1547,6 @@
       </div>
     </section>
 
-    <!-- PROCESS -->
     <section class="section" id="process">
       <div class="container">
         <span class="eyebrow reveal"></span>
@@ -1399,7 +1563,6 @@
       </div>
     </section>
 
-    <!-- REVIEWS -->
     <section class="section" id="reviews">
       <div class="container">
         <span class="eyebrow reveal"></span>
@@ -1413,23 +1576,6 @@
       </div>
     </section>
 
-    <!-- BEFORE / AFTER -->
-    <section class="section" id="gallery">
-      <div class="container">
-        <span class="eyebrow reveal"></span>
-        <h2 class="section-title reveal">До и после</h2>
-        <p class="section-subtitle reveal">Потяните ползунок, чтобы увидеть разницу. Каждый автомобиль проходит многоэтапную подготовку.</p>
-        <div class="before-after reveal" id="beforeAfter">
-          <img class="before-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop" alt="Автомобиль до детейлинга">
-          <img class="after-img" src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=1200&auto=format&fit=crop" alt="Автомобиль после детейлинга" id="afterImg">
-          <div class="ba-handle" id="baHandle"></div>
-          <input type="range" min="0" max="100" value="50" class="ba-range" id="baRange" aria-label="Сравнение до и после">
-        </div>
-        <div class="ba-labels"><span>До</span><span>После</span></div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
     <section class="section" id="faq">
       <div class="container">
         <span class="eyebrow reveal"></span>
@@ -1445,7 +1591,6 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section class="section" id="contact">
       <div class="container">
         <div class="contact-wrap">
@@ -1484,7 +1629,6 @@
       </div>
     </section>
 
-    <!-- MAP -->
     <section class="map-section" aria-label="Карта">
       <div class="map-wrap">
         <iframe title="Расположение детейлинг-центра" src="https://www.openstreetmap.org/export/embed.html?bbox=37.5900%2C55.7300%2C37.6300%2C55.7500&layer=mapnik&marker=55.7400%2C37.6100" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -1501,7 +1645,6 @@
     </footer>
   </main>
 
-  <!-- СТРАНИЦЫ УСЛУГ -->
   <main id="page-service-wash" class="page-view">
     <section class="service-page">
       <div class="container">
@@ -1757,9 +1900,7 @@
       const savedTheme = localStorage.getItem('detail-theme');
       if (savedTheme === 'light') document.documentElement.classList.add('light');
 
-      /* =====================================================
-         ПОЛНОЭКРАННОЕ МЕНЮ
-         ===================================================== */
+      /* МЕНЮ */
       const menuTrigger = document.getElementById('menuTrigger');
       const siteMenu = document.getElementById('siteMenu');
       const siteMenuClose = document.getElementById('siteMenuClose');
@@ -2104,50 +2245,6 @@
             showPage('page-service-' + link.dataset.service);
           });
         });
-      }
-
-      /* BEFORE / AFTER */
-      const range = document.getElementById('baRange');
-      const afterImg = document.getElementById('afterImg');
-      const handle = document.getElementById('baHandle');
-      const container = document.getElementById('beforeAfter');
-      function updateSlider(v) {
-        const p = Math.max(0, Math.min(100, Number(v)));
-        afterImg.style.clipPath = `inset(0 0 0 ${p}%)`;
-        handle.style.left = `${p}%`;
-      }
-      if (range) {
-        range.addEventListener('input', (e) => updateSlider(e.target.value));
-        let dragging = false;
-        function setFromEvent(x) {
-          const r = container.getBoundingClientRect();
-          const p = (Math.max(0, Math.min(r.width, x - r.left)) / r.width) * 100;
-          range.value = p; updateSlider(p);
-        }
-        handle.addEventListener('pointerdown', (e) => { dragging = true; handle.setPointerCapture?.(e.pointerId); e.preventDefault(); });
-        window.addEventListener('pointermove', (e) => { if (dragging) setFromEvent(e.clientX); });
-        window.addEventListener('pointerup', () => { dragging = false; });
-        container.addEventListener('click', (e) => { if (e.target !== range) setFromEvent(e.clientX); });
-        updateSlider(50);
-        let animated = false;
-        if ('IntersectionObserver' in window && !prefersReduced) {
-          const io = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && !animated) {
-                animated = true;
-                let t = 0;
-                const interval = setInterval(() => {
-                  t += 0.02;
-                  const v = 50 + Math.sin(t * 3) * 22 * (1 - t / 3);
-                  if (t >= 3) { clearInterval(interval); updateSlider(50); return; }
-                  updateSlider(v);
-                }, 16);
-                io.disconnect();
-              }
-            });
-          }, { threshold: 0.4 });
-          io.observe(container);
-        }
       }
 
       /* CALCULATOR */
